@@ -44,8 +44,8 @@ class seedsController{
       
       
       rectMode(CORNERS);
-      stroke(255,0,0);
-      strokeWeight(10);
+      stroke(0);
+      strokeWeight(13);
       fill(0,0);
       rect(seeds[i].x1,seeds[i].y1,seeds[i].x2,seeds[i].y2);
     }   
@@ -55,10 +55,6 @@ class seedsController{
     
   }
   
-  boolean detected(){
-    
-    return true;
-  }
   
   void collide(){
     for(int i = 0;i <num;i++){
@@ -69,25 +65,25 @@ class seedsController{
         float dx,dy,a,b;
         dx = abs(seeds[i].point.x - seeds[j].point.x);
         dy = abs(seeds[i].point.y - seeds[j].point.y);
-        a = (seeds[i].x2-seeds[i].x1+seeds[j].x2 - seeds[j].x1)/2;
-        b = (seeds[i].y2-seeds[i].y1+seeds[j].y2 - seeds[j].y1)/2;
+        a = abs(seeds[i].x2-seeds[i].x1+seeds[j].x2 - seeds[j].x1)/2;
+        b = abs(seeds[i].y2-seeds[i].y1+seeds[j].y2 - seeds[j].y1)/2;
         
         
-        if(seeds[i].x1 > seeds[j].x2 - 1 && seeds[i].x1 < seeds[j].x2 + 1 && dy<b){
+        if(seeds[i].x1 >= seeds[j].x2-1   && seeds[i].x1 <= seeds[j].x2 +1  && dy<b){
             seeds[i].leftCollide = true;
             seeds[j].rightCollide = true;
           }
-        if(seeds[i].x2 > seeds[j].x1 -1 && seeds[i].x2 < seeds[j].x1 + 1 && dy<b){
+        if(seeds[i].x2 >= seeds[j].x1-1  && seeds[i].x2 <= seeds[j].x1 +1 && dy<b){
 
             seeds[j].leftCollide = true;
             seeds[i].rightCollide = true;
           }  
-         if(seeds[i].y2 > seeds[j].y1 -1 && seeds[i].y2 < seeds[j].y1 + 1 && dx<a){
+         if(seeds[i].y2 >= seeds[j].y1-1  && seeds[i].y2 <= seeds[j].y1+1  && dx<a){
 
             seeds[j].topCollide = true;
             seeds[i].bottomCollide = true;
           }   
-         if(seeds[i].y1 > seeds[j].y2 -1 && seeds[i].y1 < seeds[j].y2 + 1 && dx<a){
+         if(seeds[i].y1 >= seeds[j].y2-1  && seeds[i].y1 <= seeds[j].y2+1  && dx<a){
 
             seeds[i].topCollide = true;
             seeds[j].bottomCollide = true;
